@@ -1,0 +1,20 @@
+Agent Creation Code Page: https://apps.abacus.ai/chatllm/?appId=ai_engineer&convoId=12c5f8c4b4
+Agent Id: 7570afb78
+
+Input: document_content
+Output: content
+
+---------------------------------------------------------------
+Curl:
+        curl -X POST "https://mihai-septimius-istrate-s-team.abacus.ai/api/executeAgent?deploymentToken=59f424d5605c4976b8f8680269c5b175&deploymentId=d98cfc010" \
+            -d '{
+"arguments": null,
+"keywordArguments": {"document_content":"hi"}
+}' \
+            -H "Content-Type: application/json"
+---------------------------------------------------------------
+
+Python:
+from abacusai import PredictionClient
+client = PredictionClient()
+client.execute_agent(deployment_token='59f424d5605c4976b8f8680269c5b175', deployment_id='d98cfc010', arguments=None, keyword_arguments={"document_content":"hi"})
