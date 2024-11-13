@@ -38,7 +38,7 @@ $(document).ready(() => {
       return;
     }
 
-    const fetchPromise = fetch('http://127.0.0.1:5000/execute', {
+    const fetchPromise = fetch('https://ai-document-summarizer-agent.onrender.com/execute', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=UTF-8',
