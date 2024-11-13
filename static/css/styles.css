@@ -25,6 +25,10 @@ form {
   text-align: center;
 }
 
+#api_url {
+  visibility: hidden;
+}
+
 .spinner {
   border: 16px solid black; /* Light grey */
   border-top: 16px solid #3498db; /* Blue */

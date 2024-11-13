@@ -18,6 +18,9 @@ function escapeHTML(str) {
 }
 
 $(document).ready(() => {
+  let appUrl   = $('#api_url');
+  let fetchUrl = appUrl.text();
+
   $('#sendRequest').on('click', event => {
     event.preventDefault();
   
@@ -38,7 +41,7 @@ $(document).ready(() => {
       return;
     }
 
-    const fetchPromise = fetch('https://ai-document-summarizer-agent.onrender.com/execute', {
+    const fetchPromise = fetch(fetchUrl + '/execute', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=UTF-8',

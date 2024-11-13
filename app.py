@@ -1,15 +1,22 @@
-from flask import Flask, request, jsonify, send_from_directory
-from abacusai import PredictionClient
 import os
+from abacusai import PredictionClient
+from flask import Flask, request, jsonify, send_from_directory, render_template
+from config import DevelopmentConfig, ProductionConfig
 
-app = Flask(__name__)
+flaskApp = Flask(__name__)
 
-@app.route('/', methods=['GET'])
+if os.getenv('FLASK_ENV') == 'production':
+  flaskApp.config.from_object(ProductionConfig)
+else:
+  flaskApp.config.from_object(DevelopmentConfig)
+
+@flaskApp.route('/', methods=['GET'])
 def home():
+  api_url = flaskApp.config['URL']
   # Serve the index.html file from the static directory
-  return send_from_directory('static', 'index.html')
+  return render_template('index.html', api_url=api_url)
 
-@app.route('/execute', methods=['POST'])
+@flaskApp.route('/execute', methods=['POST'])
 def execute_agent():
   # Extract data from the request
   data = request.json
@@ -28,4 +35,4 @@ def execute_agent():
   return jsonify(result)
 
 if __name__ == '__main__':
-  app.run(debug=True)
+  flaskApp.run(debug=True)
