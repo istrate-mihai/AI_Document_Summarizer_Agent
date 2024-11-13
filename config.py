@@ -1,4 +1,9 @@
 import os
+from flask import Flask
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
 
 class Config:
   DEBUG = False
