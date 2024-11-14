@@ -1,6 +1,7 @@
 import os
 from abacusai import PredictionClient
 from flask import Flask, request, jsonify, send_from_directory, render_template
+from flask_cors import cross_origin
 from config import DevelopmentConfig, ProductionConfig
 
 flaskApp = Flask(__name__)
@@ -17,6 +18,7 @@ def home():
   return render_template('index.html', api_url=api_url)
 
 @flaskApp.route('/execute', methods=['POST'])
+@cross_origin()
 def execute_agent():
   # Extract data from the request
   data = request.json

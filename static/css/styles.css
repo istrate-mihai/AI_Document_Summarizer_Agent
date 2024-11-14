@@ -1,6 +1,7 @@
-.main-container {
-  max-width: 800px;
-  margin: 20px auto;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 #document-content {
@@ -17,16 +18,16 @@ form {
   border: 1px solid black;
   max-width: 800px;
   margin: 20px auto;
-  visibility: hidden;
+  display: none;
 }
 
 #result-title {
-  visibility: hidden;
+  display: none;
   text-align: center;
 }
 
 #api_url {
-  visibility: hidden;
+  display: none;
 }
 
 .spinner {
@@ -49,8 +50,11 @@ form {
 
 .grid-container {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(2, 1fr); 
   gap: 20px;
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .grid-item {
@@ -59,8 +63,37 @@ form {
   border: 1px solid #ccc;
 }
 
+.grid-item img {
+  width: 100%;
+}
+
+.tab-buttons {
+  display: flex;
+  gap: 10px;
+  margin: 20px 0;
+}
+
+.tab-panel {
+  display: none;
+  animation: fadeIn 0.5s ease;
+}
+
+.tab-panel.active {
+  display: inline-block;
+}
+
+/* Mobile responsive breakpoint */
 @media (max-width: 768px) {
   .grid-container {
-      grid-template-columns: 1fr;
+    grid-template-columns: 1fr;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }

@@ -10,30 +10,51 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
   </head>
 
   <body>
-    <div class="grid-container">
-      <div class="grid-item main-container">
-        <div class="container mt-5">
-          <h1 class="text-center">AI - Document Summarizer Agent</h1>
-          <div class="form-group">
-            <textarea class="form-control" id="document-content" placeholder="Enter your document text here"></textarea>
+    <div class="main-container">
+      <div class="grid-container">
+        <div class="grid-item">
+          <div class="container m-2">
+            <h1 class="text-center">AI - Document Summarizer Agent</h1>
+            
+            <div class="tab-buttons">
+              <button class="tab-btn active btn btn-primary" data-tab="1">Enter input</button>
+              <button class="tab-btn btn btn-primary" data-tab="2">Upload file</button>
+              <button class="clear-result btn btn-primary">Clear result</button>
+            </div>
+
+            <div class="tab-content">
+              <div class="tab-panel active" data-tab="1">
+                <div class="form-group">
+                  <textarea class="form-control" id="document-content" placeholder="Enter your document text here"></textarea>
+                </div>
+              </div>
+
+              <div class="tab-panel" data-tab="2">
+                <div class="mb-3">
+                  <label for="formFile" class="form-label">Upload your document</label>
+                  <input class="form-control" type="file" id="formFile" />
+                </div>
+              </div>
+            </div>
+    
+            <button id="sendRequest" type="submit" class="btn btn-primary btn-block">Submit</button>
+            <div id="spinner" class="spinner" style="display: none;"></div>
+            <h2 id="result-title">Result: </h2>
+            <div id="response"></div>
           </div>
-  
-          <button id="sendRequest" type="submit" class="btn btn-primary btn-block">Submit</button>
-          <div id="spinner" class="spinner" style="display: none;"></div>
-          <h2 id="result-title">Result: </h2>
-          <div id="response"></div>
         </div>
-      </div>
-  
-      <div class="grid-item main-container">
-        <img src="/static/images/chatbot.png" alt="ai-chat-bot-icon" />
+    
+        <div class="grid-item">
+          <img src="/static/images/chatbot.png" alt="ai-chat-bot-icon" />
+        </div>
       </div>
     </div>
 
-    <div id="api_url">{{ api_url }}</div>
+    <div id="api_url" data-url="{{ api_url }}"></div>
     <script src="static/js/app.js"></script>
   </body>
 </html>
