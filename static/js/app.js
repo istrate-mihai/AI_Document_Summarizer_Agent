@@ -131,7 +131,7 @@ $(document).ready(() => {
           reader.readAsArrayBuffer(file);
         }
 
-        if (file.type === 'text/plain') {
+        if (file.type !== 'application/pdf') {
           reader.readAsText(file);
         }
       }
