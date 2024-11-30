@@ -20,21 +20,28 @@ def home():
 @flaskApp.route('/execute', methods=['POST'])
 @cross_origin()
 def execute_agent():
-  # Extract data from the request
-  data = request.json
+  # Extract and sanitize data from the request
+  data             = request.json
   document_content = data.get('document_content', 'default content')
+  document_content = document_content.encode('utf-8').decode('utf-8')
 
-  # Initialize the PredictionClient and execute the agent
-  client = PredictionClient()
-  result = client.execute_agent(
-    deployment_token='59f424d5605c4976b8f8680269c5b175',
-    deployment_id='d98cfc010',
-    arguments=None,
-    keyword_arguments={"document_content": document_content}
-  )
+  try:
+    # Initialize the PredictionClient and execute the agent
+    client = PredictionClient()
+    result = client.execute_agent(
+      deployment_token='59f424d5605c4976b8f8680269c5b175',
+      deployment_id='d98cfc010',
+      arguments=None,
+      keyword_arguments={"document_content": document_content},
+    )
 
-  # Return the result as a JSON response
-  return jsonify(result)
+    # Return the result as a JSON response
+    return jsonify(result)
+
+  except Exception as e:
+    error_message = f"Error executing agent: {str(e)}"
+    print(error_message)
+    return jsonify(message=error_message)
 
 if __name__ == '__main__':
   flaskApp.run(debug=True)

@@ -32,6 +32,7 @@ function sendRequest(content, fetchUrl) {
     return;
   }
 
+  console.log(fetchUrl + '/execute');
   const fetchPromise = fetch(fetchUrl + '/execute', {
     method: 'POST',
     headers: {
@@ -51,12 +52,14 @@ function sendRequest(content, fetchUrl) {
     $('#response').css('display', 'inline-block');
   })
   .catch(error => {
-    spinner.css('display', 'none');
-    console.error('Error: ', error);
+    if (typeof error != 'undefined') {
+      spinner.css('display', 'none');
+      console.error('Error: ', error);
+    }
   });
 };
 
-$(document).ready(() => {
+$(document).ready(() => { 
   // Initialize pdf.js
   pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
   let fetchUrl = $('#api_url').data('url');
